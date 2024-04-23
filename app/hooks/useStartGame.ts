@@ -1,9 +1,15 @@
-import {create} from "zustand";
+import { create } from "zustand";
 
-const useStartGame = create(set => ({
+interface StartGame {
+  isStart: boolean;
+  setStart: () => void;
+  removeAllBears: () => void;
+}
+
+const useStartGame = create<StartGame>(set => ({
   isStart: false,
-  setStart: () => set({isStart: true}),
-  removeAllBears: () => set({isStart: false}),
+  setStart: () => set({ isStart: true }),
+  removeAllBears: () => set({ isStart: false }),
 }));
 
 export default useStartGame;

@@ -1,33 +1,27 @@
-export const getWinner = values => {
+export const getWinner = (values: Record<string, number | null>) => {
+  const checkSum = (keys: string[]) => {
+    const sum = keys.reduce((acc, key) => acc + (values[key] ?? 0), 0);
+    return sum === 3 || sum === -3 ? sum : null;
+  };
+
   for (let r = 0; r < 3; r++) {
     for (let c = 0; c < 3; c++) {
-      const sumRow =
-        values[`${r}-${c}`] + values[`${r}-${c + 1}`] + values[`${r}-${c + 2}`];
-      if (sumRow === 3 || sumRow === -3) {
-        return sumRow;
-      }
+      const rowKeys = [`${r}-${c}`, `${r}-${c + 1}`, `${r}-${c + 2}`];
+      const colKeys = [`${r}-${c}`, `${r + 1}-${c}`, `${r + 2}-${c}`];
+      const diagKeys = [`${r}-${c}`, `${r + 1}-${c + 1}`, `${r + 2}-${c + 2}`];
+      const revDiagKeys = [`${r}-${c}`, `${r + 1}-${c - 1}`, `${r + 2}-${c - 2}`];
 
-      const sumCol =
-        values[`${r}-${c}`] + values[`${r + 1}-${c}`] + values[`${r + 2}-${c}`];
-      if (sumCol === 3 || sumCol === -3) {
-        return sumCol;
-      }
+      const rowResult = checkSum(rowKeys);
+      if (rowResult !== null) return rowResult;
 
-      const sumDiagonal =
-        values[`${r}-${c}`] +
-        values[`${r + 1}-${c + 1}`] +
-        values[`${r + 2}-${c + 2}`];
-      if (sumDiagonal === 3 || sumDiagonal === -3) {
-        return sumDiagonal;
-      }
+      const colResult = checkSum(colKeys);
+      if (colResult !== null) return colResult;
 
-      const sumReverseDiagonal =
-        values[`${r}-${c}`] +
-        values[`${r + 1}-${c - 1}`] +
-        values[`${r + 2}-${c - 2}`];
-      if (sumReverseDiagonal === 3 || sumReverseDiagonal === -3) {
-        return sumReverseDiagonal;
-      }
+      const diagResult = checkSum(diagKeys);
+      if (diagResult !== null) return diagResult;
+
+      const revDiagResult = checkSum(revDiagKeys);
+      if (revDiagResult !== null) return revDiagResult;
     }
   }
 
