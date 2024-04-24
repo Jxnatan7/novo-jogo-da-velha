@@ -1,7 +1,7 @@
 "use client";
 
-import { Link } from "@chakra-ui/next-js";
-import { Button, Flex, Heading } from "@chakra-ui/react";
+import {Link} from "@chakra-ui/next-js";
+import {Button, Flex, Heading} from "@chakra-ui/react";
 import Head from "next/head";
 
 export default function Home() {
@@ -23,9 +23,9 @@ export default function Home() {
           <Button
             backgroundColor="#8F00FF"
             color="#FFF"
-            _hover={{ backgroundColor: "#7e00e0" }}
-            _active={{ transform: "scale(1.1)" }}>
-            <Link href="/main-game" _hover={{ textUnderlineOffset: false }}>
+            _hover={{backgroundColor: "#7e00e0"}}
+            _active={{transform: "scale(1.1)"}}>
+            <Link href="/main-game" _hover={{textUnderlineOffset: false}}>
               Jogo da Velha (normal)
             </Link>
           </Button>
