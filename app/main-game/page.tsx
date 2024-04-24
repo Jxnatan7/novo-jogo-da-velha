@@ -1,15 +1,15 @@
 "use client";
 
-import {Button, Flex} from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 import Head from "next/head";
 import DefaultGame from "@/src/components/DefaultGame";
 import useStartGame from "@/src/hooks/useStartGame";
 import useGameStore from "@/src/hooks/useGameStore";
 
 export default function Home() {
-  const {isStart, setStart} = useStartGame();
+  const { isStart, setStart } = useStartGame();
 
-  const {reset} = useGameStore();
+  const { reset } = useGameStore();
 
   return (
     <main>
@@ -28,21 +28,9 @@ export default function Home() {
               backgroundColor="#8F00FF"
               color="#FFF"
               mb="2em"
-              _hover={{backgroundColor: "#7e00e0"}}
-              _active={{transform: "scale(1.1)"}}>
+              _hover={{ backgroundColor: "#7e00e0" }}
+              _active={{ transform: "scale(1.1)" }}>
               Começar
-            </Button>
-            <Button
-              isDisabled={!isStart}
-              width="100px"
-              height="50px"
-              onClick={reset}
-              backgroundColor="#8F00FF"
-              color="#FFF"
-              mb="2em"
-              _hover={{backgroundColor: "#7e00e0"}}
-              _active={{transform: "scale(1.1)"}}>
-              Reiniciar
             </Button>
           </Flex>
           {isStart && <DefaultGame />}
