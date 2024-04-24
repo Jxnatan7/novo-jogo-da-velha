@@ -9,7 +9,11 @@ export const getWinner = (values: Record<string, number | null>) => {
       const rowKeys = [`${r}-${c}`, `${r}-${c + 1}`, `${r}-${c + 2}`];
       const colKeys = [`${r}-${c}`, `${r + 1}-${c}`, `${r + 2}-${c}`];
       const diagKeys = [`${r}-${c}`, `${r + 1}-${c + 1}`, `${r + 2}-${c + 2}`];
-      const revDiagKeys = [`${r}-${c}`, `${r + 1}-${c - 1}`, `${r + 2}-${c - 2}`];
+      const revDiagKeys = [
+        `${r}-${c}`,
+        `${r + 1}-${c - 1}`,
+        `${r + 2}-${c - 2}`,
+      ];
 
       const rowResult = checkSum(rowKeys);
       if (rowResult !== null) return rowResult;

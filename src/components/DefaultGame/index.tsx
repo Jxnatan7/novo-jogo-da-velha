@@ -1,11 +1,12 @@
-import { getKeyFromIndex } from "@/app/services/getKeyFromIndex";
-import { getLabel } from "@/app/services/getLabel";
-import { Box, Button, Flex, Heading } from "@chakra-ui/react";
-import useGameStore from "@/app/hooks/useGameStore";
-import { getWinner } from "@/app/services/getWinner";
+import {getKeyFromIndex} from "@/src/services/DefaultGame/getKeyFromIndex";
+import {getLabel} from "@/src/services/DefaultGame/getLabel";
+import {Box, Button, Flex, Heading} from "@chakra-ui/react";
+import useGameStore from "@/src/hooks/useGameStore";
+import {getWinner} from "@/src/services/DefaultGame/getWinner";
+import {motion} from "framer-motion";
 
-const MainFrame = () => {
-  const { values, player, winner, setValues, setPlayer, setWinner, reset } =
+const DefaultGame = () => {
+  const {values, player, winner, setValues, setPlayer, setWinner, reset} =
     useGameStore();
 
   const handleClick = (key: string) => {
@@ -27,12 +28,23 @@ const MainFrame = () => {
   const itsATie = Object.values(values).filter(Boolean).length === 9 && !winner;
 
   return (
-    <Flex flexDirection="column" alignItems="center">
+    <Box
+      display="flex"
+      as={motion.div}
+      flexDirection="column"
+      alignItems="center"
+      transition="0.3s linear"
+      initial={{
+        x: -600,
+      }}
+      animate={{
+        x: 0,
+      }}>
       {!winner && (
         <Heading mb="2em">Vez do Jogador: {getLabel(player)}</Heading>
       )}
       <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" gap={2}>
-        {Array.from({ length: 9 }).map((_, index) => {
+        {Array.from({length: 9}).map((_, index) => {
           const key = getKeyFromIndex(index);
           return (
             <Button
@@ -49,7 +61,12 @@ const MainFrame = () => {
         })}
       </Box>
       {winner && (
-        <Flex flexDirection="column">
+        <Flex
+          flexDirection="column"
+          as={motion.div}
+          initial={{y: 300}}
+          animate={{y: 0}}
+          transition="0.3s linear">
           <Heading mt="1em">O GANHADOR É: {winner > 0 ? "X" : "O"}</Heading>
           <Button mt="1em" onClick={reset}>
             Reiniciar
@@ -57,15 +74,20 @@ const MainFrame = () => {
         </Flex>
       )}
       {itsATie && (
-        <Flex flexDirection="column">
-          <Heading mt="1em">O JOGO EMPATOU</Heading>
+        <Flex
+          flexDirection="column"
+          as={motion.div}
+          initial={{y: 300}}
+          animate={{y: 0}}
+          transition="0.3s linear">
+          <Heading mt="1em">HOUVE UM EMPATE</Heading>
           <Button mt="1em" onClick={reset}>
             Reiniciar
           </Button>
         </Flex>
       )}
-    </Flex>
+    </Box>
   );
 };
 
-export default MainFrame;
+export default DefaultGame;

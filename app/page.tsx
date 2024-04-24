@@ -1,37 +1,34 @@
 "use client";
 
-import {Button, Flex} from "@chakra-ui/react";
+import { Link } from "@chakra-ui/next-js";
+import { Button, Flex, Heading } from "@chakra-ui/react";
 import Head from "next/head";
-import MainFrame from "./components/MainFrame";
-import useStartGame from "./hooks/useStartGame";
 
 export default function Home() {
-  const {isStart, setStart} = useStartGame();
-
   return (
     <main>
       <Head>
         <title>Home Page</title>
       </Head>
-      <Flex minWidth="100vw" height="100vh" minH="1000px" paddingY="1em">
-        <Flex
-          flexDirection="column"
-          alignItems="center"
-          width="100%"
-          height="100%">
+      <Flex
+        flexDirection="column"
+        minWidth="100vw"
+        height="100vh"
+        alignItems="center"
+        justifyContent="center">
+        <Heading mb="3em" fontSize="x-large">
+          Qual jogo você deseja jogar?
+        </Heading>
+        <Flex flexDirection="column" width="30%">
           <Button
-            isDisabled={isStart}
-            width="100px"
-            height="50px"
-            onClick={setStart}
             backgroundColor="#8F00FF"
             color="#FFF"
-            mb="2em"
-            _hover={{backgroundColor: "#7e00e0"}}
-            _active={{transform: "scale(1.1)"}}>
-            Começar
+            _hover={{ backgroundColor: "#7e00e0" }}
+            _active={{ transform: "scale(1.1)" }}>
+            <Link href="/main-game" _hover={{ textUnderlineOffset: false }}>
+              Jogo da Velha (normal)
+            </Link>
           </Button>
-          {isStart && <MainFrame />}
         </Flex>
       </Flex>
     </main>
